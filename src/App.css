@@ -1,0 +1,14 @@
+.app {
+    text-align: center;
+}
+
+.app-header,
+.app-footer {
+    background-color: var(--clr-dark);
+    color: var(--clr-white);
+}
+
+.app-header {
+    padding-block: 1rem;
+    font-size: 1.5rem;
+}
