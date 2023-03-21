@@ -4,6 +4,7 @@
 :root {
     --clr-white: hsl(0, 0%, 100%);
     --clr-dark: hsl(220, 13%, 18%);
+    --clr-grey: hsl(0, 0%, 57%);
 
     --ff-general: sans-serif;
 }
@@ -48,12 +49,6 @@ body {
     font-size: 1rem;
     background-color: var(--clr-white);
     color: var(--clr-dark);
-}
-
-#root {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: inherit;
 }
 
 /* make images easier to work with */
