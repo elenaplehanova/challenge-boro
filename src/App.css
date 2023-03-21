@@ -1,9 +1,12 @@
 .app {
-    text-align: center;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
 .app-header,
 .app-footer {
+    text-align: center;
     background-color: var(--clr-dark);
     color: var(--clr-white);
 }
@@ -11,4 +14,16 @@
 .app-header {
     padding-block: 1rem;
     font-size: 1.5rem;
+}
+
+.app-footer {
+    padding-block: 0.5rem;
+}
+
+.app-main {
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 0.5rem;
 }
