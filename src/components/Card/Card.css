@@ -5,6 +5,21 @@
     height: 15rem;
 }
 
+.card--close {
+    animation: zoom forwards 1s ease;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
 .card-image {
     margin-inline: auto;
     height: 10rem;

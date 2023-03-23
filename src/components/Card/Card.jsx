@@ -1,15 +1,30 @@
-import React from "react";
-import "./Card.css";
+import React, { useState } from "react";
 import { BASE_URL } from "../../services/api.service";
+import prettyBytes from "pretty-bytes";
+import { useDispatch } from "react-redux";
+import { deleteCardFromCatalog } from "../../store/reducers/CatalogSlice";
+import { addNewDeletedCard } from "../../store/reducers/DeletedCardsSlice";
+import "./Card.css";
 
 const Card = ({ card }) => {
+    const dispatch = useDispatch();
     let date = new Date(card.timestamp);
 
+    const [isClose, setIsClose] = useState(false);
+
+    function deleteCard() {
+        setIsClose(true);
+        setTimeout(() => {
+            dispatch(addNewDeletedCard({ card }));
+            dispatch(deleteCardFromCatalog({ card }));
+        }, 500);
+    }
+
     return (
-        <div className="card">
-            <button className="button-close"></button>
+        <div className={`card ${isClose ? "card--close" : ""}`}>
+            <button className="button-close" onClick={() => deleteCard()}></button>
             <img className="card-image" src={`${BASE_URL}/${card.image}`} alt={card.category} />
-            <p className="card-text">filesize: {card.filesize}</p>
+            <p className="card-text">filesize: {prettyBytes(card.filesize)}</p>
             <p className="card-text">
                 date: {date.getHours()}:{date.getMinutes()}, {date.toDateString()}
             </p>
