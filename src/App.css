@@ -19,11 +19,3 @@
 .app-footer {
     padding-block: 0.5rem;
 }
-
-.app-main {
-    overflow-y: scroll;
-    display: flex;
-    flex-flow: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-}
