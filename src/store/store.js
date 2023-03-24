@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import catalogReducer from "./reducers/CatalogSlice";
 import deletedCardsReducer from "./reducers/DeletedCardsSlice";
+import paginationReducer from "./reducers/PaginationSlice";
 import {
     persistReducer,
     persistStore,
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     catalogReducer,
     deletedCardsReducer,
+    paginationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

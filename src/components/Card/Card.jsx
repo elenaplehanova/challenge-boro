@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { BASE_URL } from "../../services/api.service";
 import prettyBytes from "pretty-bytes";
-import { useDispatch } from "react-redux";
-import { deleteCardFromCatalog } from "../../store/reducers/CatalogSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCardFromCatalog, setNewPackOfCards } from "../../store/reducers/CatalogSlice";
 import { addNewDeletedCard } from "../../store/reducers/DeletedCardsSlice";
 import "./Card.css";
+import { setMaxPageNumber } from "../../store/reducers/PaginationSlice";
 
-const Card = ({ card }) => {
+const Card = ({ card, pageNumber, numberOfCardsPerPage }) => {
     const dispatch = useDispatch();
     let date = new Date(card.timestamp);
+    const { catalog } = useSelector((state) => state.catalogReducer);
+    const { deletedCards } = useSelector((state) => state.deletedCardsReducer);
 
     const [isClose, setIsClose] = useState(false);
 
@@ -17,6 +20,14 @@ const Card = ({ card }) => {
         setTimeout(() => {
             dispatch(addNewDeletedCard({ card }));
             dispatch(deleteCardFromCatalog({ card }));
+            dispatch(
+                setMaxPageNumber({
+                    catalog: catalog,
+                    deletedCards: deletedCards,
+                })
+            );
+
+            dispatch(setNewPackOfCards({ pageNumber, numberOfCardsPerPage }));
         }, 500);
     }
 
