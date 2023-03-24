@@ -14,6 +14,7 @@ import ApiService from "../../services/api.service";
 import Loader from "../Loader/Loader";
 import Pagination from "../Pagination/Pagination";
 import "./CardGallery.css";
+import Sorting from "../Sorting/Sorting";
 
 const CardGallery = () => {
     const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const CardGallery = () => {
             <button className="button-reset" onClick={() => reset()}>
                 Reset deleted cards
             </button>
+            <Sorting></Sorting>
             <Pagination></Pagination>
             <div className="card-container">
                 {packOfCards &&

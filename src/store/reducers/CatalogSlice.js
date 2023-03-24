@@ -48,12 +48,22 @@ const catalogSlice = createSlice({
                 pageNumber * numberOfCardsPerPage + numberOfCardsPerPage
             );
         },
+        filterCatalogByField(state, action) {
+            let field = action.payload.field;
+
+            function byField(fieldName) {
+                return (a, b) => (a[fieldName] > b[fieldName] ? 1 : -1);
+            }
+
+            state.catalog = state.catalog.sort(byField(field));
+        },
     },
 });
 
 export const {
     deleteCardFromCatalog,
     fillCatalog,
+    filterCatalogByField,
     resetCatalog,
     setNewPackOfCards,
     markDeletedCards,
