@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     catalog: [],
+    packOfCards: [],
 };
 
 const catalogSlice = createSlice({
@@ -36,10 +37,26 @@ const catalogSlice = createSlice({
 
             state.catalog = newCatalog;
         },
+        setNewPackOfCards(state, action) {
+            let pageNumber = action.payload.pageNumber - 1;
+            let numberOfCardsPerPage = action.payload.numberOfCardsPerPage;
+
+            let catalogWithoutDeleted = state.catalog.filter((card) => !card.deleted);
+
+            state.packOfCards = catalogWithoutDeleted.slice(
+                pageNumber * numberOfCardsPerPage,
+                pageNumber * numberOfCardsPerPage + numberOfCardsPerPage
+            );
+        },
     },
 });
 
-export const { deleteCardFromCatalog, fillCatalog, resetCatalog, markDeletedCards } =
-    catalogSlice.actions;
+export const {
+    deleteCardFromCatalog,
+    fillCatalog,
+    resetCatalog,
+    setNewPackOfCards,
+    markDeletedCards,
+} = catalogSlice.actions;
 
 export default catalogSlice.reducer;
