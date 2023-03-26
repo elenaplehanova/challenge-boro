@@ -11,15 +11,12 @@ const paginationSlice = createSlice({
     initialState,
     reducers: {
         setMaxPageNumber(state, action) {
-            let catalog = action.payload.catalog;
-            let deletedCards = action.payload.deletedCards;
-            state.maxPageNumber = Math.ceil(
-                (catalog.length - deletedCards.length) / state.numberOfCardsPerPage
-            );
+            let length = action.payload.length;
+            state.maxPageNumber = Math.ceil(length / state.numberOfCardsPerPage);
         },
         changePageNumber(state, action) {
             let isForward = action.payload.isForward;
-            state.pageNumber = isForward ? ++state.pageNumber : --state.pageNumber;
+            isForward ? ++state.pageNumber : --state.pageNumber;
         },
     },
 });

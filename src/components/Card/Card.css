@@ -29,16 +29,3 @@
     text-align: start;
     padding-left: 0.5rem;
 }
-
-.button-close {
-    position: absolute;
-    right: 0;
-    width: 1.3rem;
-    aspect-ratio: 1;
-    background-color: var(--clr-white);
-    background-repeat: no-repeat;
-    background-size: 0.7rem;
-    background-position: center;
-    background-image: url("../../assets/icons/close.svg");
-    cursor: pointer;
-}

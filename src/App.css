@@ -19,3 +19,27 @@
 .app-footer {
     padding-block: 0.5rem;
 }
+
+.app-main {
+    overflow-y: scroll;
+    position: relative;
+}
+
+.form-toggle-view {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.form-toggle-view .radio-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.loader-container {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: max-content;
+    height: max-content;
+}

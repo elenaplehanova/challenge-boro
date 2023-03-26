@@ -4,6 +4,7 @@
 :root {
     --clr-white: hsl(0, 0%, 100%);
     --clr-dark: hsl(220, 13%, 18%);
+    --clr-dark-opacity: hsl(220 13% 18% / 0.7);
     --clr-grey: hsl(0, 0%, 57%);
 
     --ff-general: sans-serif;
@@ -76,4 +77,22 @@ select {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+
+.button-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1.3rem;
+    aspect-ratio: 1;
+    background-color: var(--clr-white);
+    background-repeat: no-repeat;
+    background-size: 0.7rem;
+    background-position: center;
+    background-image: url("assets/icons/close.svg");
+    cursor: pointer;
 }

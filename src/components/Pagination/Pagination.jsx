@@ -1,27 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changePageNumber } from "../../store/reducers/PaginationSlice";
-import { setNewPackOfCards } from "../../store/reducers/CatalogSlice";
 import "./Pagination.css";
 
 const Pagination = () => {
-    const { pageNumber, maxPageNumber, numberOfCardsPerPage } = useSelector(
-        (state) => state.paginationReducer
-    );
+    const { pageNumber, maxPageNumber } = useSelector((state) => state.paginationReducer);
     const dispatch = useDispatch();
 
     function changePage(isForward) {
         dispatch(changePageNumber({ isForward: isForward }));
     }
-
-    useEffect(() => {
-        let canceled = true;
-        if (canceled) {
-            dispatch(setNewPackOfCards({ pageNumber, numberOfCardsPerPage }));
-        }
-
-        return () => (canceled = false);
-    }, [pageNumber, maxPageNumber]);
 
     return (
         <div className="pagination-container">

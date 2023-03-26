@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    fillCatalog,
     resetCatalog,
     markDeletedCards,
     setNewPackOfCards,
@@ -10,66 +9,45 @@ import {
 import { resetDeletedCards } from "../../store/reducers/DeletedCardsSlice";
 import { setMaxPageNumber } from "../../store/reducers/PaginationSlice";
 import Card from "../Card/Card";
-import ApiService from "../../services/api.service";
-import Loader from "../Loader/Loader";
 import Pagination from "../Pagination/Pagination";
-import "./CardGallery.css";
 import Sorting from "../Sorting/Sorting";
+import "./CardGallery.css";
 
 const CardGallery = () => {
     const dispatch = useDispatch();
     const { catalog, packOfCards } = useSelector((state) => state.catalogReducer);
     const { deletedCards } = useSelector((state) => state.deletedCardsReducer);
-    const { pageNumber, numberOfCardsPerPage } = useSelector((state) => state.paginationReducer);
+    const { pageNumber, maxPageNumber, numberOfCardsPerPage } = useSelector(
+        (state) => state.paginationReducer
+    );
 
-    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        let canceled = true;
-        setIsLoading(true);
-        ApiService.getCards().then((data) => {
-            if (canceled) {
-                dispatch(fillCatalog({ catalog: [...data.slice(0, 20)] }));
-
-                if (deletedCards.length) {
-                    dispatch(markDeletedCards({ deletedCards }));
-                }
-
-                dispatch(
-                    setMaxPageNumber({
-                        catalog: [...data.slice(0, 20)],
-                        deletedCards: deletedCards,
-                    })
-                );
-
-                setIsLoading(false);
-            }
-        });
-
-        return () => (canceled = false);
+        if (deletedCards.length) {
+            dispatch(markDeletedCards({ deletedCards }));
+        }
     }, []);
 
-    function reset() {
-        dispatch(resetCatalog());
-        dispatch(resetDeletedCards());
+    useEffect(() => {
+        let displayedCatalogLength = catalog.length - deletedCards.length;
+
         dispatch(
             setMaxPageNumber({
-                catalog: catalog,
-                deletedCards: [],
+                length: displayedCatalogLength,
             })
         );
-        dispatch(setNewPackOfCards({ pageNumber, numberOfCardsPerPage }));
-    }
+    }, [catalog, deletedCards]);
 
-    if (isLoading) {
-        return (
-            <main className="loader-container">
-                <Loader></Loader>
-            </main>
-        );
-    }
+    useEffect(() => {
+        dispatch(setNewPackOfCards({ pageNumber, numberOfCardsPerPage }));
+    }, [pageNumber, maxPageNumber, deletedCards, catalog]);
+
+    const reset = () => {
+        dispatch(resetCatalog());
+        dispatch(resetDeletedCards());
+    };
 
     return (
-        <main className="card-gallery-container">
+        <div>
             <button className="button-reset" onClick={() => reset()}>
                 Reset deleted cards
             </button>
@@ -78,19 +56,10 @@ const CardGallery = () => {
             <div className="card-container">
                 {packOfCards &&
                     packOfCards.map((item) => {
-                        return (
-                            !item.deleted && (
-                                <Card
-                                    key={item.image}
-                                    card={item}
-                                    pageNumber={pageNumber}
-                                    numberOfCardsPerPage={numberOfCardsPerPage}
-                                ></Card>
-                            )
-                        );
+                        return !item.deleted && <Card key={item.image} card={item}></Card>;
                     })}
             </div>
-        </main>
+        </div>
     );
 };
 
