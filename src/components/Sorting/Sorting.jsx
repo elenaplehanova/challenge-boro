@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Sorting.css";
-import { useDispatch, useSelector } from "react-redux";
-import { filterCatalogByField, setNewPackOfCards } from "../../store/reducers/CatalogSlice";
+import { useDispatch } from "react-redux";
+import { filterCatalogByField } from "../../store/reducers/CatalogSlice";
 
 const Sorting = () => {
     let dispatch = useDispatch();
-    const { pageNumber, numberOfCardsPerPage } = useSelector((state) => state.paginationReducer);
+    const [selected, setSelected] = useState("category");
 
-    const filter = (e) => {
-        const { value } = e.target;
-        dispatch(filterCatalogByField({ field: value }));
-        dispatch(setNewPackOfCards({ pageNumber, numberOfCardsPerPage }));
+    const selectedChange = (e) => {
+        setSelected(e.target.value);
     };
+
+    useEffect(() => {
+        dispatch(filterCatalogByField({ field: selected }));
+    }, [selected]);
 
     return (
         <form className="sorting-container">
@@ -24,7 +26,8 @@ const Sorting = () => {
                             id="category"
                             name="sorting"
                             value="category"
-                            onClick={filter}
+                            checked={selected === "category"}
+                            onChange={selectedChange}
                         />
                         <label htmlFor="category">category</label>
                     </div>
@@ -34,7 +37,8 @@ const Sorting = () => {
                             id="timestamp"
                             name="sorting"
                             value="timestamp"
-                            onClick={filter}
+                            checked={selected === "timestamp"}
+                            onChange={selectedChange}
                         />
                         <label htmlFor="timestamp">date</label>
                     </div>
@@ -44,7 +48,8 @@ const Sorting = () => {
                             id="image"
                             name="sorting"
                             value="image"
-                            onClick={filter}
+                            checked={selected === "image"}
+                            onChange={selectedChange}
                         />
                         <label htmlFor="image">file name</label>
                     </div>
@@ -54,9 +59,10 @@ const Sorting = () => {
                             id="filesize"
                             name="sorting"
                             value="filesize"
-                            onClick={filter}
+                            checked={selected === "filesize"}
+                            onChange={selectedChange}
                         />
-                        <label htmlFor="filesize">filesize</label>
+                        <label htmlFor="filesize">file size</label>
                     </div>
                 </div>
             </fieldset>

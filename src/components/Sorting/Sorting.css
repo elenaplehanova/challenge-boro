@@ -1,12 +1,10 @@
 .sorting-container {
     display: flex;
     justify-content: center;
-    align-self: center;
     padding-bottom: 1rem;
 }
 
-.radio-container {
+.sorting-container .radio-container {
     display: flex;
     gap: 1rem;
-    width: max-content;
 }

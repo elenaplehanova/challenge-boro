@@ -1,13 +1,3 @@
-.card-gallery-container {
-    overflow-y: scroll;
-}
-
-.loader-container {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-}
-
 .button-reset {
     width: max-content;
     cursor: pointer;
