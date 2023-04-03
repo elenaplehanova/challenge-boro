@@ -45,13 +45,13 @@ const Sorting = () => {
                     <div>
                         <input
                             type="radio"
-                            id="image"
+                            id="filename"
                             name="sorting"
-                            value="image"
-                            checked={selected === "image"}
+                            value="filename"
+                            checked={selected === "filename"}
                             onChange={selectedChange}
                         />
-                        <label htmlFor="image">file name</label>
+                        <label htmlFor="filename">file name</label>
                     </div>
                     <div>
                         <input

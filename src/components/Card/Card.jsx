@@ -29,6 +29,7 @@ const Card = ({ card }) => {
                 date: {date.getHours()}:{date.getMinutes()}, {date.toDateString()}
             </p>
             <p className="card-text">category: {card.category}</p>
+            <p className="card-text">file name: {card.filename}</p>
         </div>
     );
 };
