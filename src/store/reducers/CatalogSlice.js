@@ -16,7 +16,9 @@ const catalogSlice = createSlice({
     initialState,
     reducers: {
         fillCatalog(state, action) {
-            state.catalog = action.payload.catalog;
+            state.catalog = action.payload.catalog.map((item) => {
+                return { ...item, filename: item.image.split("/").at(-1) };
+            });
         },
         resetCatalog(state) {
             let newCatalog = state.catalog.map((item) => {
