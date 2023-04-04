@@ -28,7 +28,7 @@ const Node = ({ node }) => {
                         onClick={() => setIsShowModal(true)}
                     />
                     {isShowModal && (
-                        <Modal>
+                        <Modal handlerClick={() => setIsShowModal(false)}>
                             <button
                                 className="button-close"
                                 onClick={() => setIsShowModal(false)}
