@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetCatalog, markDeletedCards } from "../../store/reducers/CatalogSlice";
 import { resetDeletedCards } from "../../store/reducers/DeletedCardsSlice";
-import Pagination from "../Pagination/Pagination";
 import Sorting from "../Sorting/Sorting";
 import "./CardGallery.css";
 import CardSet from "../CardSet/CardSet";
+import { setPageNumber } from "../../store/reducers/PaginationSlice";
+import { Pagination } from "@mui/material";
 
 const CardGallery = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const CardGallery = () => {
         dispatch(resetCatalog());
         dispatch(resetDeletedCards());
     };
+    const { pageNumber, maxPageNumber } = useSelector((state) => state.paginationReducer);
 
     return (
         <div>
@@ -29,7 +31,12 @@ const CardGallery = () => {
                 Reset deleted cards
             </button>
             <Sorting></Sorting>
-            <Pagination></Pagination>
+            <Pagination
+                className="pagination"
+                page={pageNumber}
+                count={maxPageNumber}
+                onChange={(event, page) => dispatch(setPageNumber({ pageNumber: page }))}
+            />
             <CardSet></CardSet>
         </div>
     );
