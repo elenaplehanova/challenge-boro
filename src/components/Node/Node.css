@@ -29,9 +29,8 @@
 
 .leaf-thumbnail {
     cursor: pointer;
-
-    width: 2rem;
+    width: 4rem;
     aspect-ratio: 1;
-
     border: var(--clr-grey) 0.2rem solid;
+    object-fit: cover;
 }

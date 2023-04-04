@@ -3,7 +3,7 @@ import CardGallery from "./components/CardGallery/CardGallery";
 import Tree from "./components/Tree/Tree";
 import ApiService from "./services/api.service";
 import { useDispatch } from "react-redux";
-import { fillCatalog } from "./store/reducers/CatalogSlice";
+import { fillCatalog, fillCatalogAsTree } from "./store/reducers/CatalogSlice";
 import Loader from "./components/Loader/Loader";
 import "./App.css";
 
@@ -22,6 +22,7 @@ function App() {
         ApiService.getCards().then((data) => {
             if (isFirstMounting) {
                 dispatch(fillCatalog({ catalog: data }));
+                dispatch(fillCatalogAsTree());
                 setIsLoading(false);
             }
         });
