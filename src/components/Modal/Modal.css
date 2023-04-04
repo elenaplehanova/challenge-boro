@@ -1,4 +1,4 @@
-.modal-container {
+.modal-wrapper {
     width: 100%;
     height: 100%;
 
@@ -12,4 +12,8 @@
     place-items: center;
 
     z-index: 1000;
+}
+
+.modal-container {
+    position: relative;
 }
