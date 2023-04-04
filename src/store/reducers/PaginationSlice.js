@@ -13,14 +13,16 @@ const paginationSlice = createSlice({
         setMaxPageNumber(state, action) {
             let length = action.payload.length;
             state.maxPageNumber = Math.ceil(length / state.numberOfCardsPerPage);
+            if (state.pageNumber > state.maxPageNumber) {
+                state.pageNumber = state.maxPageNumber;
+            }
         },
-        changePageNumber(state, action) {
-            let isForward = action.payload.isForward;
-            isForward ? ++state.pageNumber : --state.pageNumber;
+        setPageNumber(state, action) {
+            state.pageNumber = action.payload.pageNumber;
         },
     },
 });
 
-export const { setMaxPageNumber, changePageNumber } = paginationSlice.actions;
+export const { setMaxPageNumber, setPageNumber } = paginationSlice.actions;
 
 export default paginationSlice.reducer;
