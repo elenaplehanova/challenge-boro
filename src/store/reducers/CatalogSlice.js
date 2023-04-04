@@ -61,7 +61,7 @@ const catalogSlice = createSlice({
         },
         fillCatalogAsTree(state) {
             let categoriesMap = new Map();
-            [...state.catalog].sort(byField("category")).forEach((item) => {
+            state.catalog.forEach((item) => {
                 if (categoriesMap.has(item.category)) {
                     let oldValue = categoriesMap.get(item.category);
                     categoriesMap.set(item.category, [...oldValue, { ...item }]);
